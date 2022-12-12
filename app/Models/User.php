@@ -8,9 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;   
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +27,7 @@ class User extends Authenticatable
         'tipo_usuario_id',
     ];
 
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -45,11 +47,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tipo_usuarios()
+    public function tipoUsuario()
     {
-        return $this->hasMany(
-            TipoUsuario::class,
-            'tipo_usuario_id'
-        );
+        return $this->belongsTo("App\Models\TipoUsuario");
     }
+
+    public function denuncias()
+    {
+        return $this->hasMany("App\Models\Denuncia");
+    }
+    
 }

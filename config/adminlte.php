@@ -290,52 +290,56 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+
 
         // Sidebar items:
 
         [
-            'text' => 'Listagem de Usuários',
+            'text' => 'Usuários',
             'url'  => 'http://127.0.0.1:8000/usuarios',
             'icon' => 'fas fa-fw fa-users',
+            'can' => ['admin', 'denunciante']
         ],
+
         [
-            'text' => 'Tipos de Usuários',
+            'text' => 'Tipos de Usuário',
             'url'  => 'http://127.0.0.1:8000/tipoUsuarios',
             'icon' => 'fas fa-user-tag',
+            'can' => ['admin']
         ],
         [
-            'text' => 'Listagem de Cidades',
+            'text' => 'Cidades',
             'url'  => 'http://127.0.0.1:8000/cidades',
-            'icon' => 'fas fa-user-plus',
+            'icon' => 'fas fa-sharp fa-solid fa-city',
+            'can' => ['admin']
         ],
         [
-            'text' => 'Listagem de Estados',
+            'text' => 'Bairros',
+            'url'  => 'http://127.0.0.1:8000/bairros',
+            'icon' => 'fas fa-sharp fa-solid fa-city',
+            'can' => ['admin']
+        ],
+        [
+            'text' => 'Estados',
             'url'  => 'http://127.0.0.1:8000/estados',
-            'icon' => 'fas fa-user-edit',
+            'icon' => 'fas fa-solid fa-flag',
+            'can' => ['admin']
         ],
         [
-            'text' => 'Tipos de Infração',
-            'url'  => 'http://127.0.0.1:8000/tipoInfracao',
-            'icon' => 'fas fa-user-tag',
+            'text' => 'Infrações',
+            'url'  => 'http://127.0.0.1:8000/infracoes',
+            'icon' => 'fas fa-regular fa-file',
+            'can' => ['admin']
         ],
         [
             'text' => 'Denúncias',
             'url'  => 'http://127.0.0.1:8000/denuncias',
-            'icon' => 'fas fa-user-tag',
+            'icon' => 'fas fa-solid fa-paperclip',
+            'can' => ['admin', 'denunciante']
         ],
     ],
 
-   
+
 
 
 

@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
+use Laravel\Sanctum\HasApiTokens;
+
+
+
+
 
 
 class UserController extends Controller
@@ -13,9 +20,7 @@ class UserController extends Controller
 
     public function index()
     {
-
-        $usuarios = User::all();
-
+        $usuarios = User::where('id', '=', Auth::user()->id)->paginate(5);
         return view('usuario.index', ['usuarios' => $usuarios]);
     }
 
@@ -26,25 +31,25 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        $data = [
+
+        $tipo = 2;
+
+        User::create([
+
             'name' => $request['name'],
             'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'password' => bcrypt($request['password']),
             'cpf' => $request['cpf'],
             'telefone' => $request['telefone'],
-            'tipo_usuario_id' => $request['tipo_usuario_id']
-        ];
-
-        User::create($data);
-
+            'tipo_usuario_id' => $tipo
+        ]);
 
         return redirect('usuarios');
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $id = Auth::id();
-        $usuario = User::find($id);
+        $usuario = User::find(Crypt::decrypt($request->get('id')));
         return view('usuario.edit', compact('usuario'));
     }
 
@@ -59,5 +64,18 @@ class UserController extends Controller
         User::find($id)->update($data);
 
         return redirect('usuarios');
+    }
+
+    public function destroy($id)
+    {
+        try {
+            User::find($id)->delete();
+            $ret = array('status' => 200, 'msg' => "Excluído com sucesso!");
+        } catch (\Illuminate\Database\QueryException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        } catch (\PDOException $e) {
+            $ret = array('status' => 500, 'msg' => $e->getMessage());
+        }
+        return $ret;
     }
 }

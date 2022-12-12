@@ -28,7 +28,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="cpf" class="col-md-4 col-form-label text-md-end">{{ __('CPF') }}</label>
+                                <label for="cpf"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('CPF') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="cpf" type="text"
@@ -44,7 +45,8 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="telefone" class="col-md-4 col-form-label text-md-end">{{ __('Telefone') }}</label>
+                                <label for="telefone"
+                                    class="col-md-4 col-form-label text-md-end">{{ __('Telefone') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="telefone" type="text"
@@ -56,6 +58,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
                                 </div>
                             </div>
 
@@ -118,3 +121,13 @@
         </div>
     </div>
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+<script>
+    $(document).ready(function($) {
+        $('#cpf').mask('000.000.000-00');
+        $('#telefone').mask('(00) 00000-0000');
+    });
+</script>

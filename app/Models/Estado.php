@@ -8,13 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Estado extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['descricao'];
     public $timestamps = false;
+    protected $table = "estados";
+    protected $fillable = ['descricao', 'sigla'];
 
 
     public function denuncias()
     {
-        return $this->belongsTo(Denuncia::class);
+        return $this->hasMany("App\Models\Denuncia");
+    }
+
+    public function cidades()
+    {
+        return $this->hasMany("App\Models\Cidade");
     }
 }

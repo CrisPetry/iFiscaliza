@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('cpf', 14)->unique();
             $table->string('telefone', 15);
-            $table->foreignId('tipo_usuario_id')->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

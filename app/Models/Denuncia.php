@@ -8,30 +8,47 @@ use Illuminate\Database\Eloquent\Model;
 class Denuncia extends Model
 {
     use HasFactory;
+    protected $table = "denuncias";
+    protected $fillable = [
+        'data',
+        'descricao',
+        'pontoReferencia',
+        'path',
+        'users_id',
+        'estado_id',
+        'cidade_id',
+        'infracao_id',
+        'status_id',
+        'bairro_id'
+    ];
 
-
-    public function infracoes()
+    public function user()
     {
-        return $this->hasMany(
-            Infracao::class,
-            'infracao_id'
-        );
+        return $this->belongsTo("App\Models\User", "users_id");
     }
 
-
-    public function cidades()
+    public function estado()
     {
-        return $this->hasMany(
-            Cidade::class,
-            'cidade_id'
-        );
+        return $this->belongsTo("App\Models\Estado");
     }
 
-    public function estados()
+    public function cidade()
     {
-        return $this->hasMany(
-            Estado::class,
-            'estado_id'
-        );
+        return $this->belongsTo("App\Models\Cidade");
+    }
+
+    public function bairro()
+    {
+        return $this->belongsTo("App\Models\Bairro");
+    }
+
+    public function infracao()
+    {
+        return $this->belongsTo("App\Models\Infracao");
+    }
+
+    public function status()
+    {
+        return $this->belongsTo("App\Models\Status");
     }
 }

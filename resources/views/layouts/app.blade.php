@@ -44,7 +44,7 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
+                            {{-- @if (Route::has('login'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Logar') }}</a>
                                 </li>
@@ -54,7 +54,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                                 </li>
-                            @endif
+                            @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" style="color: #FFF" href="#"
@@ -65,13 +65,13 @@
 
                                 <div class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" style="color: #FFF" href="{{ route('logout') }}"
+                                    <a class="dropdown-item" style="color: #FFF; " href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Sair') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                         @csrf
                                     </form>
                                 </div>

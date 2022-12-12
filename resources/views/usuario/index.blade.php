@@ -1,33 +1,20 @@
-@extends('adminlte::page')
+@extends('layouts.default')
 
 @section('content')
 
-    <div class="container pt-3">
+    <div class="container-fluid pt-3">
         <nav aria-label="Page breadcrumb">
-            <ol class="breadcrumb">
+            <ol class="breadcrumb" style="padding-top: 10px; padding-bottom:10px;">
                 <li class="breadcrumb-item"><a href="http://127.0.0.1:8000/home">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Usuários</li>
-                <div class="container-fluid">
-                    <div class="float-end"
-                        style="display:flex; 
-                flex-direction:row-reverse; margin-top:-28px;">
-                        <button class="btn btn-danger">Excluir</button>
-                        <button class="btn btn-warning"
-                            style="margin-left:5px; 
-                        margin-right:5px;">Editar</button>
-                        <button class="btn btn-success"
-                            onclick="location.href = 'http://127.0.0.1:8000/usuarios/create'">Adicionar</button>
-                    </div>
-                </div>
             </ol>
         </nav>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover table-responsive-md">
+            <table class="table table-striped table-bordered table-hover">
                 <thead style="text-align: center">
-                    <th>#</th>
                     <th>ID</th>
                     <th>Nome</th>
                     <th>E-mail</th>
@@ -39,17 +26,28 @@
                 <tbody>
                     @foreach ($usuarios as $usuario)
                         <tr style="text-align: center">
-                            <td><input type="checkbox"></td>
                             <td>{{ $usuario->id }}</td>
                             <td>{{ $usuario->name }}</td>
                             <td>{{ $usuario->email }}</td>
                             <td>{{ $usuario->cpf }}</td>
                             <td>{{ $usuario->telefone }}</td>
-                            <td>{{ $usuario->tipo_usuario_id }}</td>
+                            <td>{{ $usuario->tipoUsuario->descricao }}</td>
+                            
+                            {{-- <td>
+                                <a href="{{ route('usuarios.edit', ['id' => \Crypt::encrypt($usuario->id)]) }}"
+                                    class="btn-sm btn-dark">
+                                    <i class="fa fa-edit"></i></a>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            {{ $usuarios->links('pagination::bootstrap-4') }}
         </div>
     </div>
 @stop
+
+@section('table-delete')
+    "usuarios"
+@endsection

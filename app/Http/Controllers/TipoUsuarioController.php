@@ -7,15 +7,44 @@ use Illuminate\Http\Request;
 
 class TipoUsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $tipoUsuarios = TipoUsuario::all();
+        $tipoUsuarios = TipoUsuario::orderBy('descricao')->paginate(5);
 
         return view('tipoUsuario.index', ['tipoUsuarios' => $tipoUsuarios]);
+    }
+
+    public function create()
+    {
+        return view('tipoUsuario.create');
+    }
+
+
+    public function store(Request $request)
+    {
+        $tipoUsuarios = $request->all();
+        TipoUsuario::create($tipoUsuarios);
+        return redirect()->route('tipoUsuarios');
+    }
+
+
+    public function edit($id)
+    {
+        $tipoUsuarios = TipoUsuario::find($id);
+        return view('tipoUsuario.edit', compact('tipoUsuarios'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        TipoUsuario::find($id)->update($request->all());
+        return redirect()->route('tipoUsuarios');
+    }
+
+
+    public function destroy($id)
+    {
+        TipoUsuario::find($id)->delete();
+        return redirect()->route('tipoUsuarios');
     }
 }

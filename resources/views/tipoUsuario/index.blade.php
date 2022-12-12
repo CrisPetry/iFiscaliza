@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.default')
 
 @section('content')
 
@@ -11,21 +11,29 @@
         </nav>
     </div>
 
-    <div class="container">
-        <table class="table table-striped table-bordered table-hover table-responsive-md">
-            <thead style="text-align: center">
-                <th>ID</th>
-                <th>Descrição</th>
-            </thead>
+    <div class="container-fluid">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead style="text-align: center">
+                    <th>ID</th>
+                    <th>Descrição</th>
+                </thead>
 
-            <tbody>
-                @foreach ($tipoUsuarios as $tipoUsuario)
-                    <tr style="text-align: center">
-                        <td>{{ $tipoUsuario->id }}</td>
-                        <td>{{ $tipoUsuario->descricao }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+                <tbody>
+                    @foreach ($tipoUsuarios as $tipoUsuario)
+                        <tr style="text-align: center">
+                            <td>{{ $tipoUsuario->id }}</td>
+                            <td>{{ $tipoUsuario->descricao }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+
+            {{ $tipoUsuarios->links('pagination::bootstrap-4') }}
+        </div>
     </div>
 @stop
+
+@section('table-delete')
+    "tipoUsuarios"
+@endsection
